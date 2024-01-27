@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"regex.h": "c",
+		"stdio.h": "c",
+		"stdlib.h": "c",
+		"cat_parse.h": "c",
+		"ios": "cpp",
+		"__locale": "c",
+		"sstream": "c",
+		"string.h": "c",
+		"locale": "c",
+		"parse.h": "c"
+	}
+}
