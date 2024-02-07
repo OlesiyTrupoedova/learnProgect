@@ -52,7 +52,7 @@ public class Example
   public static void print_s21_is_equal(decimal number1, decimal number2, int num)
   {
     int origin = 0;
-    if(number1 < number2) origin = 1;
+    if(number1 > number2) origin = 1;
     Console.WriteLine("#test s21_s21_is_less{0}\n", num);
     Console.WriteLine("  s21_decimal src1, src2;\n");
     int[] bits1 = decimal.GetBits(number1);
