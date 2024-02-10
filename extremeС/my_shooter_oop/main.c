@@ -8,15 +8,17 @@
 int main(){   
     struct gun_t* gun;
     struct gun_t* gun2;
-    gun2 = gun_init(SNIPER, "M4A1");
-    gun = gun_init(PISTOL, "MAKER");
-
+    struct gun_t* gun3;
+    gun2 = gun_init();
+    gun = gun_init();
+    gun3 = gun_init();
+    gun_ctor(gun, RIFLE, "AK");
+    gun_ctor(gun2, PISTOL, "M4");
+    gun_ctor(gun3, SHOTGUN, "Shotgun");
     struct player_t* player;
     player = player_init();
     player_ctor(player, "Alex");
-    player_set_gun(player, gun);
-    player_shoot(player);
-    player_change_gun(player, gun2);
+    player_set_gun(player, gun3);
     player_shoot(player);
     free(player);
 

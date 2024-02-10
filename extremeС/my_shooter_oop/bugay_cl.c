@@ -1,6 +1,6 @@
-#include "gun_cl.h"
 #include "player_cl.h"
 #include "player_cl_p.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -10,13 +10,16 @@ typedef struct bugay_t{
 }bugay_t;
 
 void bugay_ctor(bugay_t* bugay, char* name){
-    player_ctor(&bugay->player, name);
+    player_ctor((struct player_t*)bugay, name);
     bugay->health = 100;
 }
 
+void bugay_dctor(bugay_t* bugay){;
+    free(bugay);
+}
+
 bugay_t *bugay_init(){
-    bugay_t *bugay = malloc(sizeof(bugay_t));
-    return bugay;
+    return (bugay_t*)malloc(sizeof(bugay_t));
 }
 
 void bugay_shoot(bugay_t* bugay){

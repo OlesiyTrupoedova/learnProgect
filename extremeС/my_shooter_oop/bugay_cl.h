@@ -1,5 +1,4 @@
 #include "player_cl_p.h"
-#include "gun_cl.h"
 #include "player_cl.h"
 
 #ifndef BUGAY_CL

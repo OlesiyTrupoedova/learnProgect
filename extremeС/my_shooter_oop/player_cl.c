@@ -2,14 +2,10 @@
 #include <string.h>
 #include "gun_cl.h"
 
-typedef struct player_t{
-    char name[20];
-    struct gun_t *gun;
-}player_t;
+#include "player_cl_p.h"
 
 player_t* player_init(){
-    player_t *player = malloc(sizeof(player_t));
-    return player;
+    return (player_t*)malloc(sizeof(player_t));
 }
 void player_ctor(player_t* player, char* name){
     strcpy(player->name, name);

@@ -10,7 +10,8 @@ enum gun_type {
 
 struct gun_t;
 
+void gun_ctor(struct gun_t*,int , char *);
 void gun_shoot(struct gun_t *);
 void gun_destroy(struct gun_t *);
-struct gun_t *gun_init(int type, char *name_gun);
+struct gun_t *gun_init();
 #endif

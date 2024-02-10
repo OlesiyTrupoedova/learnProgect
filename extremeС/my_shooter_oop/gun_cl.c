@@ -33,28 +33,29 @@ void __gun_random(gun_t *gun){
 
 }
 
-gun_t *gun_init(int type, char *name_gun){
-    gun_t *gun = malloc(sizeof(gun_t));
+gun_t *gun_init(){
+    return (gun_t*)malloc(sizeof(gun_t));
+}
+void gun_ctor(gun_t *gun ,int type, char *name_gun){
     gun->type = type;
     gun->cartridges = 0;
     gun->horn = 0;
     strcpy(gun->name_gun, name_gun);
     __gun_random(gun);
-    return gun;
 }
 
 void __gun_shoot_sound(int type){
     if(type == 0){
-        printf("Pew Pew");
+        printf("Pew ");
     }
     if(type == 1){
-        printf("Paw");
+        printf("Paw ");
     }
     if(type == 2){
-        printf("Skidish");
+        printf("Skidish "); 
     }
     if(type == 3){
-        printf("Pabax");
+        printf("Pabax ");
     }
 }
 
