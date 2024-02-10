@@ -1,0 +1,51 @@
+CC = g++
+CFLAGS := -Wall -Wextra -Werror -lstdc++ -std=c++17
+clang := -n
+LDFLAGS =-lgtest -lstdc++ 
+TARGET = s21_matrix_oop.a
+
+TEST_MATRIX  = $(wildcard tests/*.cc)
+TEST_OBJ_MATRIX  = $(TEST_MATRIX:.cc=.o)
+
+MATRIX_SRC = $(wildcard *.cc)
+MATRIX_OBJS =   $(MATRIX_SRC:.cc=.o)
+
+rebuild: clean all
+
+all: $(TARGET)
+
+$(TARGET): $(MATRIX_OBJS)
+	ar rcs $@ $^ $(MATRIX_OBJS)
+
+gcov_report: CFLAGS += -fprofile-arcs -ftest-coverage
+gcov_report: LDFLAGS += --coverage 
+gcov_report: clean $(TARGET) test
+	lcov --directory . --capture --output-file ./app.info
+	lcov --remove ./app.info '*/tests/*' -o ./app.info
+	genhtml ./app.info -o ./gcov_report
+	open ./gcov_report/index.html
+
+
+test: $(TEST_OBJ_MATRIX) $(TARGET) 
+	$(CC) -std=c++17 $(TEST_OBJ_MATRIX) $(LDFLAGS) $(TARGET) -o tests/$@
+	./tests/test
+
+test%.o: test%.c
+	$(CC) -c $< $(LDFLAGS) -o $@
+
+check: clean valgrind clang-format
+
+valgrind: test_compile
+	CK_FORK=no valgrind --tool=memcheck --leak-check=yes tests/test
+
+clang-format:
+	clang-format --style=Google $(clang) *.cpp *.h
+	clang-format --style=Google $(clang) tests/*.cpp tests/*.h
+
+clean:
+	rm -rf gcov_report
+	rm -f $(TARGET)
+	rm -rf *.o *.gcda *.gcno app.info tests/*.gcda tests/*.gcno 
+	rm -rf obj/*.o tests/obj/*.o tests/*.o
+	rm -rf *.o
+	rm -f tests/test
